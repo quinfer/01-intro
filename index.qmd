@@ -1,12 +1,16 @@
 ---
 title: "FIN7028: Advanced Financial Data Analytics" 
-subtitle: ""
+subtitle: "Setting the scene"
 author: 
     - "Barry Quinn  CStat" 
 date: '`r Sys.Date()`' 
-format: revealjs
+format: 
+  revealjs:
+    slide-number: c/t
+    scrollable: true
 css: mycssblend.css
-logo: img/logo.png
+logo: img/qbslogo.png
+bibliography: references.bib
 ---
 ```{r}
 #| include: false
@@ -52,7 +56,7 @@ style_mono_accent(
     software.
 -   Work independently or in groups towards an empirical goal.
 
-## Professional skills
+## Professional skills {.smaller}
 
 -   Modern data science [`tidy`](https://r4ds.had.co.nz/tidy-data.html)
     data principles.
@@ -224,7 +228,6 @@ countdown(minutes = 5, warn_when = 1)
 
 - It is **wrongly** assumed that high explanatory = high
 predictive power. 
-
 - Explanatory models apply statistics to data to test **casual** hypothesis of theoretical constructs. 
 - Prediction models apply statistics or data mining algorithms to data to predict future
 observations. 
@@ -268,24 +271,20 @@ observations.
 
 ## Model comparison
 
-.pull-left-1.large\[Instead of falsifying a null model, compare
-meaningful models.\]
+- [Instead of falsifying a null model, compare
+meaningful models]{.saltinline}
 
-.pull-right-2\[ .large\[Basic problems\] - Overfitting or Data
-Snooping - Causal inference - Ockham's razor is silly - Information
-theory is less silly - AIC, cross-validation - Must distinguish
-prediction from inference\]
+[Basic problems]{.large} 
 
-## Applying financial time series econometrics
+- Overfitting or Data Snooping 
+- Causal inference 
+- Ockham's razor is silly - Information theory is less silly 
+  - AIC, cross-validation 
 
--   Financial time series econometrics is concerned with theory and
-    practice of asset valuation over time
--   It has similarity to other time series analysis but has some added
-    uncertainty.
--   FTS analysis must deal with the ever-changing business and economic
-    enviroment and the fact that volatility is not directly observed.
+- Must distinguish prediction from inference]
 
-## Applying financial time series econometrics
+
+## Applying financial data analytics
 
 **Describe**
 
@@ -303,8 +302,60 @@ prediction from inference\]
 
 class: center
 
-## Wrap_Up
+## 
 
 <span class="glow">Questions ?</span>
 
-Slides created via the R packages:
+## Embracing Complexity {.unnumbered}
+
+- Paradigm shift in financial analytics
+- Integration of machine learning, classical financial time series econometrics, and Bayesian methods
+- Addressing complex, uncertain, and conflicting objectives in finance
+- Inspired by seminal works like [@Kelly2022complexity; @Kelly2023FML]
+
+## Financial Markets: A Complex Predictive System {.unnumbered}
+
+- Understanding market prices as predictions
+- Use of ARIMA and GARCH in classical econometrics
+- Limitations of traditional approaches in modern finance
+- The challenge of complex and vast datasets
+
+### The Predictive Nature of Market Prices {.smaller}
+
+- Asset pricing model: $$P_{it} = E[M_{t+1} X_{it+1} | I_t ]$$
+- Components: Asset price, expectation, stochastic discount factor, future payoff, available information
+- Market prices as aggregated investor predictions
+
+## The Role of Bayesian Methods and Machine Learning {.unnumbered}
+
+- Bayesian methods for probabilistic modeling and incorporating prior knowledge
+- Machine learning for handling large datasets and complex models
+- Complementing traditional econometrics with advanced techniques
+
+## Unifying Theoretical Foundations {.unnumbered}
+
+- Machine learning's overparameterization and regularization
+- Bayesian methods for dynamic and adaptive modeling
+- Balancing high-dimensional data and probabilistic inference
+
+## Synergising Econometrics, Bayesian Methods, and Machine Learning {.unnumbered}
+
+- Comprehensive toolkit for financial market analysis
+- Econometrics for foundational models
+- Bayesian methods for adaptability
+- Machine learning for predictive power
+
+## Adopting a Growth Mindset While Learning Advanced Financial Data Analytics {.unnumbered}
+
+- Importance of a growth mindset in learning analytics
+- Characteristics: Embracing challenges, persistence, leveraging feedback, learning from success, avoiding complacency
+- Benefits: Improved performance, resiliency, collaboration, adaptability, long-term focus
+- Strategies for fostering a growth mindset: Setting goals, tracking progress, seeking opportunities, engaging peers, accepting mistakes
+
+## Wrap-up {.unnumbered}
+
+- Detailed exploration of methodologies in financial data analytics
+- Embracing complexity in financial markets
+- Enhancing understanding and decision-making through integrated approaches
+
+## References

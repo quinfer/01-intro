@@ -30,7 +30,26 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="mycssblend.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -245,6 +264,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -330,6 +350,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">FIN7028: Advanced Financial Data Analytics</h1>
+  <p class="subtitle">Setting the scene</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -365,7 +386,7 @@ Barry Quinn CStat
 <li>Work independently or in groups towards an empirical goal.</li>
 </ul>
 </section>
-<section id="professional-skills" class="slide level2">
+<section id="professional-skills" class="slide level2 smaller">
 <h2>Professional skills</h2>
 <ul>
 <li>Modern data science <a href="https://r4ds.had.co.nz/tidy-data.html"><code>tidy</code></a> data principles.</li>
@@ -488,7 +509,7 @@ Barry Quinn CStat
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_12fc4618" data-warn-when="1" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_76f52f66" data-warn-when="1" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -537,11 +558,11 @@ Barry Quinn CStat
 <section id="to-explain-predict-or-describe" class="slide level2">
 <h2>To explain, predict or describe</h2>
 <ul>
-<li><p>It is <strong>wrongly</strong> assumed that high explanatory = high predictive power.</p></li>
-<li><p>Explanatory models apply statistics to data to test <strong>casual</strong> hypothesis of theoretical constructs.</p></li>
-<li><p>Prediction models apply statistics or data mining algorithms to data to predict future observations.</p></li>
-<li><p>The type of model uncertainty is different for each choice.</p></li>
-<li><p>Explaining minimises <em>bias</em>, while prediction minimises <em>bias + variance</em> occasionally sacrificing theoretical accuracy for empirical precision.</p></li>
+<li>It is <strong>wrongly</strong> assumed that high explanatory = high predictive power.</li>
+<li>Explanatory models apply statistics to data to test <strong>casual</strong> hypothesis of theoretical constructs.</li>
+<li>Prediction models apply statistics or data mining algorithms to data to predict future observations.</li>
+<li>The type of model uncertainty is different for each choice.</li>
+<li>Explaining minimises <em>bias</em>, while prediction minimises <em>bias + variance</em> occasionally sacrificing theoretical accuracy for empirical precision.</li>
 </ul>
 </section>
 <section id="building-a-model" class="slide level2">
@@ -590,19 +611,22 @@ Barry Quinn CStat
 </section>
 <section id="model-comparison" class="slide level2">
 <h2>Model comparison</h2>
-<p>.pull-left-1.large[Instead of falsifying a null model, compare meaningful models.]</p>
-<p>.pull-right-2[ .large[Basic problems] - Overfitting or Data Snooping - Causal inference - Ockham’s razor is silly - Information theory is less silly - AIC, cross-validation - Must distinguish prediction from inference]</p>
-</section>
-<section id="applying-financial-time-series-econometrics" class="slide level2">
-<h2>Applying financial time series econometrics</h2>
 <ul>
-<li>Financial time series econometrics is concerned with theory and practice of asset valuation over time</li>
-<li>It has similarity to other time series analysis but has some added uncertainty.</li>
-<li>FTS analysis must deal with the ever-changing business and economic enviroment and the fact that volatility is not directly observed.</li>
+<li><span class="saltinline">Instead of falsifying a null model, compare meaningful models</span></li>
+</ul>
+<p><span class="large">Basic problems</span></p>
+<ul>
+<li>Overfitting or Data Snooping</li>
+<li>Causal inference</li>
+<li>Ockham’s razor is silly - Information theory is less silly
+<ul>
+<li>AIC, cross-validation</li>
+</ul></li>
+<li>Must distinguish prediction from inference]</li>
 </ul>
 </section>
-<section id="applying-financial-time-series-econometrics-1" class="slide level2">
-<h2>Applying financial time series econometrics</h2>
+<section id="applying-financial-data-analytics" class="slide level2">
+<h2>Applying financial data analytics</h2>
 <p><strong>Describe</strong></p>
 <ol type="1">
 <li>Estimating parameters of well-defined probability models that describe the behaviour of financial time series.</li>
@@ -617,13 +641,89 @@ Barry Quinn CStat
 </ol>
 <p>class: center</p>
 </section>
-<section id="wrap_up" class="slide level2">
-<h2>Wrap_Up</h2>
+<section id="section" class="slide level2">
+<h2></h2>
 <p><span class="glow">Questions ?</span></p>
-<p>Slides created via the R packages:</p>
+</section>
+<section id="embracing-complexity" class="slide level2 unnumbered">
+<h2>Embracing Complexity</h2>
+<ul>
+<li>Paradigm shift in financial analytics</li>
+<li>Integration of machine learning, classical financial time series econometrics, and Bayesian methods</li>
+<li>Addressing complex, uncertain, and conflicting objectives in finance</li>
+<li>Inspired by seminal works like <span class="citation" data-cites="Kelly2022complexity Kelly2023FML">(<a href="#/references" role="doc-biblioref" onclick="">Bryan T. Kelly, Malamud, and Zhou 2022</a>; <a href="#/references" role="doc-biblioref" onclick="">Bryan T. Kelly and Xiu 2023</a>)</span></li>
+</ul>
+</section>
+<section id="financial-markets-a-complex-predictive-system" class="slide level2 unnumbered">
+<h2>Financial Markets: A Complex Predictive System</h2>
+<ul>
+<li>Understanding market prices as predictions</li>
+<li>Use of ARIMA and GARCH in classical econometrics</li>
+<li>Limitations of traditional approaches in modern finance</li>
+<li>The challenge of complex and vast datasets</li>
+</ul>
+<h3 class="smaller" id="the-predictive-nature-of-market-prices">The Predictive Nature of Market Prices</h3>
+<ul>
+<li>Asset pricing model: <span class="math display">\[P_{it} = E[M_{t+1} X_{it+1} | I_t ]\]</span></li>
+<li>Components: Asset price, expectation, stochastic discount factor, future payoff, available information</li>
+<li>Market prices as aggregated investor predictions</li>
+</ul>
+</section>
+<section id="the-role-of-bayesian-methods-and-machine-learning" class="slide level2 unnumbered">
+<h2>The Role of Bayesian Methods and Machine Learning</h2>
+<ul>
+<li>Bayesian methods for probabilistic modeling and incorporating prior knowledge</li>
+<li>Machine learning for handling large datasets and complex models</li>
+<li>Complementing traditional econometrics with advanced techniques</li>
+</ul>
+</section>
+<section id="unifying-theoretical-foundations" class="slide level2 unnumbered">
+<h2>Unifying Theoretical Foundations</h2>
+<ul>
+<li>Machine learning’s overparameterization and regularization</li>
+<li>Bayesian methods for dynamic and adaptive modeling</li>
+<li>Balancing high-dimensional data and probabilistic inference</li>
+</ul>
+</section>
+<section id="synergising-econometrics-bayesian-methods-and-machine-learning" class="slide level2 unnumbered">
+<h2>Synergising Econometrics, Bayesian Methods, and Machine Learning</h2>
+<ul>
+<li>Comprehensive toolkit for financial market analysis</li>
+<li>Econometrics for foundational models</li>
+<li>Bayesian methods for adaptability</li>
+<li>Machine learning for predictive power</li>
+</ul>
+</section>
+<section id="adopting-a-growth-mindset-while-learning-advanced-financial-data-analytics" class="slide level2 unnumbered">
+<h2>Adopting a Growth Mindset While Learning Advanced Financial Data Analytics</h2>
+<ul>
+<li>Importance of a growth mindset in learning analytics</li>
+<li>Characteristics: Embracing challenges, persistence, leveraging feedback, learning from success, avoiding complacency</li>
+<li>Benefits: Improved performance, resiliency, collaboration, adaptability, long-term focus</li>
+<li>Strategies for fostering a growth mindset: Setting goals, tracking progress, seeking opportunities, engaging peers, accepting mistakes</li>
+</ul>
+</section>
+<section id="wrap-up" class="slide level2 unnumbered">
+<h2>Wrap-up</h2>
+<ul>
+<li>Detailed exploration of methodologies in financial data analytics</li>
+<li>Embracing complexity in financial markets</li>
+<li>Enhancing understanding and decision-making through integrated approaches</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
 
-<img src="img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
+<img src="img/qbslogo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Kelly2022complexity" class="csl-entry" role="listitem">
+Kelly, Bryan T, Semyon Malamud, and Kangying Zhou. 2022. <span>“<span class="nocase">The Virtue of Complexity Everywhere</span>.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.4171581">https://doi.org/10.2139/ssrn.4171581</a>.
+</div>
+<div id="ref-Kelly2023FML" class="csl-entry" role="listitem">
+Kelly, Bryan T., and Dacheng Xiu. 2023. <span>“<span>Financial Machine Learning</span>.”</span> <em>SSRN Electronic Journal</em>. <a href="https://doi.org/10.2139/ssrn.4520856">https://doi.org/10.2139/ssrn.4520856</a>.
+</div>
 </div>
 </section>
     </div>
@@ -678,7 +778,7 @@ Barry Quinn CStat
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
