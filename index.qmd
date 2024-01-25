@@ -1,0 +1,310 @@
+---
+title: "FIN7028: Advanced Financial Data Analytics" 
+subtitle: ""
+author: 
+    - "Barry Quinn  CStat" 
+date: '`r Sys.Date()`' 
+format: revealjs
+css: mycssblend.css
+logo: img/logo.png
+---
+```{r}
+#| include: false
+options(htmltools.dir.version = FALSE)
+library(knitr)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+library(tidyverse)
+library(fontawesome) 
+library(countdown)
+library(xaringanExtra)
+library(emoji)
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono")
+  )
+```
+
+## Contact details
+
+-   **Barry Quinn** b.quinn\@qub.ac.uk
+-   Chartered Statistician (Royal Statistical Society)
+-   8 years industry + 12 Academia
+-  Office hours and Coding Clinics by appointment
+
+## Learning outcomes{.smaller}
+-   Begin to understand econometrics as a science of uncertainty and
+    variation.
+-   Introduction to the ethical application of statistics using dynamic
+    reporting and literate programming.
+-   Exhibit intellectual humility and discipline in data analytics.
+-   Understand the iterative process of real-world data analysis.
+-   Understand how to use statistical techniques to calibrate answers to
+    many problems posed in Finance.
+-   Understand how to source, prepared and encode financial time series
+    data.
+-   Obtain analytical skills to identify patterns in data.
+-   Understand how to robustly infer real-world effects from statistical
+    analysis.
+-   Understand how to encode analytical questions using statistical
+    software.
+-   Work independently or in groups towards an empirical goal.
+
+## Professional skills
+
+-   Modern data science [`tidy`](https://r4ds.had.co.nz/tidy-data.html)
+    data principles.
+-   Literate programming principles [Donald
+    Knuth](https://www-cs-faculty.stanford.edu/~knuth/taocp.html).
+-   Open science analytics using cloud computing
+    .glowline[Q-RaP]-[https://sso.rstudio.cloud/q-rap](https://www-cs-faculty.stanford.edu/~knuth/taocp.html)
+-   Responsible research principles to produce sensible statistical
+    inference.
+-   Principles of appropriate data visualisation.
+-   The ability to work independently to glean meaning from noisy
+    financial data.
+-   Advanced professionalism through improved independent
+    learning/research techniques.
+
+## Statistical thinking skills
+
+-   Gain insight into the limitations of statistical models
+-   Begin to use statistical models responsibly, ethically, and
+    professionally.
+-   To have enough *statistical knowledge* to be comfortable with
+    *knowing that you don't know*.
+
+[Building up your empirical stamina]{.large}
+
+## Teaching and learning philosopy
+
+-   [Instil:]{.salt}
+
+-   [Intellectual discipline]{.saltinline}
+
+    -   `Think critically and form your own opinions`
+
+-   [Intellectual humility]{.saltinline}
+
+    -   `Enough confidence to be comfortable in your own confusion`
+
+- [Good citizenship]{.saltinline}
+
+    -   `Acting ethically, altruistically,  responsibly and professionally`
+
+- [Employability]{.saltinline}
+
+    -   `Develop students into employable graduates` </span>
+
+## Teaching and learning approach
+
+-   Lectures will combine concepts and financial application with
+    live-coding.
+-   Come prepared and bring your laptop or device with web browser.
+-   Interactive tutorials on QMS Remote Analytics Platform (Q-RaP).
+
+## Feedback
+
+-   Student *feedback* is important to me and I will provide this in a
+    *professional* manner *conditional* on students behaving in a
+    *professional and courteous* manner.
+-   Each week there will be an anonymous poll where you can give
+    feedback.
+-   I am a NICE person when students act in a professional and
+    courteous.
+-   Otherwise I can be a fastidious scold.
+
+> Read my communiction policy link
+
+## Q-RaP
+
+#### Queen's Business School Remote Analytics Platform
+:::: {.columns}
+
+::: {.column width="50%"}
+#### you used to have this
+
+```{r computer-lab, echo=FALSE, out.width="70%"}
+knitr::include_graphics("img/jonathan-borba-PZBjJ12Xv2s-unsplash.jpg")
+```
+
+:::
+
+::: {.column width="50%"}
+#### and now you have this
+
+```{r laptop-at-home, echo=FALSE, out.width="80%"}
+knitr::include_graphics("img/sincerely-media-o5Key-1HzaY-unsplash.jpg")
+```
+
+:::
+
+::::
+
+## What is Posit Cloud?
+```{r echo=FALSE}
+knitr::include_graphics("img/cloud.png")
+```
+[**Posit Cloud**](https://Posit.cloud/)
+created to make it easy for professionals, hobbyists, trainers,
+teachers, and students to do, share, teach, and learn data science using
+
+## Spot the Difference?
+
+:::: {.columns}
+::: {.column width="50%"}
+```{r echo=FALSE}
+knitr::include_graphics("img/rstudio-ide.png")
+```
+:::
+:::{.column width="50%"}
+```{r echo=FALSE}
+knitr::include_graphics("img/rstudio-cloud.png")
+```
+:::
+::::
+
+## First look
+
+<https://sso.posit.cloud/q-rap>
+
+```{r echo=FALSE, out.width="80%", fig.align="center"}
+knitr::include_graphics("img/q-rap-landing-1.png")
+```
+
+### Your turn
+#### `r emoji("woman_technologist")` Students:
+
+-   login to Q-RaP using your QUB credentials
+-   Create a new project and give it a name
+-   Install a package of your choice
+-   Create a template R Markdown document in the project
+-   Change the access level of the project so others can see it as well
+-   Copy the project URL and share it with a friend in class
+
+
+```{r echo=FALSE}
+countdown(minutes = 5, warn_when = 1)
+```
+
+## Course overview
+
+- Prerequistes: 
+  - Financial Data Analytics
+  - A laptop or device you can access Q-RaP
+  - A growth mindset
+- Asessement: 50% project + 50% computer-based class test
+- Course also has a companion open sourced book found here <https://q-rap.connect.qub.ac.uk/AFDA/>
+- All slides are hosted on GitHub and can be converted to PDFs as you desire.
+
+## Active learning and the 15 minute rule
+
+{{< video https://youtu.be/ZS8QHRtzcPg?si=HazZr5qaOdgpTk2X >}}
+
+-   We will use the **15 minute** rule in this class.
+-   If you encounter problems, spend 15 minutes troubleshooting on your
+    own.
+-   Make use of Google and StackOverflow to resolve the error
+-   If your problem is not resolved after 15 minutes.
+-  Ask for help by booking into a coding clinic or in practicals
+
+## Plagiarism
+
+-   I am trying to balance two competing perspectives:
+    1.  Collaboration is good
+    2.  Collaboration is cheating
+-   In-class collaboration is good **to a point**.
+-   You are always expected to write and submit your **own work**.
+-   Asking for help is ok (after 15 minute rule),
+-   Blindly copy from your peers (or published work) is not.
+
+## To explain, predict or describe
+
+- It is **wrongly** assumed that high explanatory = high
+predictive power. 
+
+- Explanatory models apply statistics to data to test **casual** hypothesis of theoretical constructs. 
+- Prediction models apply statistics or data mining algorithms to data to predict future
+observations. 
+- The type of model uncertainty is different for each choice. 
+- Explaining minimises *bias*, while prediction minimises *bias + variance* occasionally sacrificing theoretical accuracy for empirical precision.
+
+## Building a model
+
+-   How to use probability to do typical statistical modeling?
+
+1.  Design the model (data story)
+
+-   Formulated using theory from previous studies
+
+2.  Condition on the data (update or estimate model)
+3.  Evaluate the model (critique)
+
+-   **And Repeat Until Satisified**
+
+## Reading finance papers (the context)
+
+-   You data story comes from reading research papers
+
+#### Research project tips
+
+-   What is the puzzle the paper is trying to solve?
+-   How do they solve it?
+-   Does it develop a new model?
+-   Is it an existing technique with a new application?
+-   Is it a data mining excercise?
+-   Is the data of *good quality* ? Reliable, sample size etc.
+
+## Reading finance papers
+
+### Research project tips
+
+-   Have model assumptions been validly checked and critiqued?
+-   Are results interpreted sensibly or exaggerated?
+-   Do results actually address the questions posed?
+-   Have conclusions been drawn appropriate or overstated?
+
+## Model comparison
+
+.pull-left-1.large\[Instead of falsifying a null model, compare
+meaningful models.\]
+
+.pull-right-2\[ .large\[Basic problems\] - Overfitting or Data
+Snooping - Causal inference - Ockham's razor is silly - Information
+theory is less silly - AIC, cross-validation - Must distinguish
+prediction from inference\]
+
+## Applying financial time series econometrics
+
+-   Financial time series econometrics is concerned with theory and
+    practice of asset valuation over time
+-   It has similarity to other time series analysis but has some added
+    uncertainty.
+-   FTS analysis must deal with the ever-changing business and economic
+    enviroment and the fact that volatility is not directly observed.
+
+## Applying financial time series econometrics
+
+**Describe**
+
+1.  Estimating parameters of well-defined probability models that
+    describe the behaviour of financial time series.
+
+**Explain**
+
+2.  Testing hypotheses on how financial markets generate the series of
+    interest.
+
+**Predict**
+
+3.  Forecast future realisations of the financial time series.
+
+class: center
+
+## Wrap_Up
+
+<span class="glow">Questions ?</span>
+
+Slides created via the R packages:

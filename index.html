@@ -1,833 +1,1026 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
-  <head>
-    <title>FIN7030: Times Series Financial Econometrics 1</title>
-    <meta charset="utf-8" />
-    <meta name="author" content="Barry Quinn" />
-    <meta name="author" content="Applied Statistician PhD CStat" />
-    <meta name="date" content="2023-01-29" />
-    <script src="libs/header-attrs/header-attrs.js"></script>
-    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
-    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
-    <link href="libs/panelset/panelset.css" rel="stylesheet" />
-    <script src="libs/panelset/panelset.js"></script>
-    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
-    <script src="libs/tile-view/tile-view.js"></script>
-    <link href="libs/countdown/countdown.css" rel="stylesheet" />
-    <script src="libs/countdown/countdown.js"></script>
-    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
-    <link rel="stylesheet" href="slides-style.css" type="text/css" />
-    <link rel="stylesheet" href="mycssblend.css" type="text/css" />
-  </head>
-  <body>
-    <textarea id="source">
-class: center, middle, inverse, title-slide
-
-.title[
-# FIN7030: Times Series Financial Econometrics 1
-]
-.subtitle[
-## Rethinking Econometrics
-]
-.author[
-### Barry Quinn
-]
-.author[
-### Applied Statistician PhD CStat
-]
-.date[
-### 2023-01-29
-]
-
----
-
-
-
-
-layout: true
-&lt;div class="my-footer"&gt;
-&lt;span&gt;
-Barry Quinn CStat
-&lt;/span&gt;
-
-&lt;/div&gt; 
----
-
-
-
-layout: true
-&lt;div class="my-footer"&gt;&lt;span&gt;quinference.com&lt;/span&gt;&lt;/div&gt;
----
-class:
-
-## Contact details
-
-.pull-left[
-.large[
-- **Barry Quinn**
-- b.quinn@qub.ac.uk 
--  via [Rethinking Economemtrics Slack Channel ](https://join.slack.com/t/rethinkingeco-3ss9716/shared_invite/zt-12nfdfr7o-XAy2Ef1knAKXgUNo2kWw3w))
-- Chartered Statistician (Royal Statistical Society)
-- 8 years industry + 10 years academia]
-]
-.pull-right[
-.large[
-  - **Veronica Zhang**
-  - yzhang107@qub.ac.uk
-  - Studying for a PhD in capital regulation in chinese banking.
-]
-]
-
----
-class: middleowa
-# Learning outcomes
-
-
-- Begin to understand econometrics as a science of uncertainty and variation.
-
-- Introduction to the ethical application of statistics using dynamic reporting and literate programming.
-
-- Exhibit intellectual humility and discipline in data analytics.
-
-- Understand the iterative process of real-world data analysis.
-
-- Understand how to use statistical techniques to calibrate answers to many problems posed in Finance.
-
--  Understand how to source, prepared and encode financial time series data.
-
--  Obtain analytical skills to identify patterns in data.
-
-- Understand how to robustly infer real-world effects from statistical analysis.
-
-- Understand how to encode analytical questions using statistical software.
-
-- Work independently or in groups towards an empirical goal.
-
----
-class: middle
-
-# Professional skills
-
-- Modern data science [`tidy`](https://r4ds.had.co.nz/tidy-data.html) data principles.
-- Literate programming principles [Donald Knuth](https://www-cs-faculty.stanford.edu/~knuth/taocp.html).
-- Open science analytics using cloud computing .glowline[Q-RaP]-[https://sso.rstudio.cloud/q-rap](https://www-cs-faculty.stanford.edu/~knuth/taocp.html)
-- Responsible research principles to produce sensible statistical inference.
-- Principles of appropriate data visualisation.
-- The ability to work independently to glean meaning from noisy financial data.
-- Advanced professionalism through improved independent learning/research techniques.
-
----
-class:middle
-
-# Rethinking econometric principles
-.salt[
-- Gain insight into the limitations of statistical models
-- Begin to use statistical models responsibly, ethically, and professionally.
-- To have enough *statistical knowledge* to be comfortable with *knowing that you don't know*.
-]
-
-&gt; .large[Building up your empirical stamina]
-
----
-class: middle
-  
-## Teaching and learning philosopy
-.salt[
-- Instil:]
-* .saltinline[Intellectual discipline]
-    - `Think critically and form your own opinions`
-* .saltinline[Intellectual humility]
-    - `Enough confidence to be comfortable in your own confusion`
-  3. .saltinline[Good citizenship]
-    - `Acting ethically, altruistically,  responsibly and professionally`
-  4. .saltinline[Employability]
-    - `Develop students into employable graduates`
-]
----
-class: middle
-
-## Teaching and learning approach
-
-  - Lectures will combine concepts and financial application with live-coding.
-  - Come prepared and bring your laptop or device with web browser.
-  - Interactive tutorials on QMS Remote Analytics Platform (Q-RaP).
-
-## Feedback
-
-  - Student *feedback* is important to me and I will provide this in a *professional* manner *conditional* on students behaving in a *professional and courteous* manner.
-  - Each week there will be an anonymous poll where you can give feedback.
-  - I am a NICE person when students act in a professional and courteous.
-  - Otherwise I can be a fastidious scold.
-
-&gt;Read my communiction policy link
-
----
-class: middle
-
-# What is Q-RaP?
-
---
-
-### Qms-Remote analytics Platform
-
---
-
-&gt;**Motivation**: 
-- A crisis of confidence exists in science; finance included!  
-- My goal for Q-RaP is to educate students on the principles of [Open Science](https://www.rrbm.network) using open source analytics.
-- Allow students to do something interest with data within the first 10 minutes of the first class.
-
---
-- .acidinline[It consists of two parts]
-
-.pull-left[
-**Advanced Teaching**
-- High-Performance Cloud Computing 
-- Hosted in Azure
-- Managed by QMS DevOps Team
-- For Advanced Analytics at PGT and PGR level
-- Request form access only
-]
-.pull-right[
-**Foundational Teaching**
-- Posit Cloud (200+ students concurrently)
-- SSO authentication using Sibboleith
-- Works out of the box
-  ]
-
----
-class: middle
-
-.pull-left[
-### you used to have this
-&lt;img src="img/jonathan-borba-PZBjJ12Xv2s-unsplash.jpg" width="70%" /&gt;
-]
---
-.pull-right[
-### and now you have this
-&lt;img src="img/sincerely-media-o5Key-1HzaY-unsplash.jpg" width="80%" /&gt;
-]
-
-.footnote[
-.tiny[Photos by Jonathan Borba and Sincerely Media on Unsplash.]
-]
-
-
----
-class: middle
-
-## What is Posit Cloud?
-
-&lt;br&gt;
-
-.pull-left-narrow[
-&lt;img src="img/cloud.png" width="264" /&gt;
-]
-.pull-right-wide[
-.large[[**Posit Cloud**](https://Posit.cloud/) created to make it easy for professionals, hobbyists, trainers, teachers, and students to do, share, teach, and learn data science using R.]
-]
-
----
-class: middle
-
-.center[
-&lt;img src="img/rstudio-ide.png" width="80%" /&gt;
-]
-
----
-class: middle
-
-.center[
-&lt;img src="img/rstudio-cloud.png" width="80%" /&gt;
-]
-
----
-
----
-class: middle
-
-## First look
-
-.large[[https://sso.posit.cloud/q-rap](https://sso.posit.cloud/q-rap)]
-
-&lt;img src="img/q-rap-landing-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-
----
-class: middle
-.your-turn[
-
-#### 👩‍💻 Students:
-- login to Q-RaP using your QUB credentials
-- Create a new project and give it a name
-- Install a package of your choice
-- Create a template R Markdown document in the project
-- Change the access level of the project so others can see it as well
-- Copy the project URL and share it with a friend in class
-]
-
-<div class="countdown" id="timer_e1ccfb56" data-warn-when="1" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
-<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
-<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+<html lang="en"><head>
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/tabby.min.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.450">
+
+  <meta name="author" content="Barry Quinn CStat">
+  <meta name="dcterms.date" content="2024-01-25">
+  <title>FIN7028: Advanced Financial Data Analytics</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="mycssblend.css">
+  <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <link href="index_files/libs/countdown/countdown.css" rel="stylesheet">
+  <script src="index_files/libs/countdown/countdown.js"></script>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">FIN7028: Advanced Financial Data Analytics</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Barry Quinn CStat 
+</div>
+</div>
 </div>
 
+  <p class="date">2024-01-25</p>
+</section>
+<section id="contact-details" class="slide level2">
+<h2>Contact details</h2>
+<ul>
+<li><strong>Barry Quinn</strong> b.quinn@qub.ac.uk</li>
+<li>Chartered Statistician (Royal Statistical Society)</li>
+<li>8 years industry + 12 Academia</li>
+<li>Office hours and Coding Clinics by appointment</li>
+</ul>
+</section>
+<section id="learning-outcomes" class="slide level2 smaller">
+<h2>Learning outcomes</h2>
+<ul>
+<li>Begin to understand econometrics as a science of uncertainty and variation.</li>
+<li>Introduction to the ethical application of statistics using dynamic reporting and literate programming.</li>
+<li>Exhibit intellectual humility and discipline in data analytics.</li>
+<li>Understand the iterative process of real-world data analysis.</li>
+<li>Understand how to use statistical techniques to calibrate answers to many problems posed in Finance.</li>
+<li>Understand how to source, prepared and encode financial time series data.</li>
+<li>Obtain analytical skills to identify patterns in data.</li>
+<li>Understand how to robustly infer real-world effects from statistical analysis.</li>
+<li>Understand how to encode analytical questions using statistical software.</li>
+<li>Work independently or in groups towards an empirical goal.</li>
+</ul>
+</section>
+<section id="professional-skills" class="slide level2">
+<h2>Professional skills</h2>
+<ul>
+<li>Modern data science <a href="https://r4ds.had.co.nz/tidy-data.html"><code>tidy</code></a> data principles.</li>
+<li>Literate programming principles <a href="https://www-cs-faculty.stanford.edu/~knuth/taocp.html">Donald Knuth</a>.</li>
+<li>Open science analytics using cloud computing .glowline<a href="#/q-rap">Q-RaP</a>-<a href="https://www-cs-faculty.stanford.edu/~knuth/taocp.html">https://sso.rstudio.cloud/q-rap</a></li>
+<li>Responsible research principles to produce sensible statistical inference.</li>
+<li>Principles of appropriate data visualisation.</li>
+<li>The ability to work independently to glean meaning from noisy financial data.</li>
+<li>Advanced professionalism through improved independent learning/research techniques.</li>
+</ul>
+</section>
+<section id="statistical-thinking-skills" class="slide level2">
+<h2>Statistical thinking skills</h2>
+<ul>
+<li>Gain insight into the limitations of statistical models</li>
+<li>Begin to use statistical models responsibly, ethically, and professionally.</li>
+<li>To have enough <em>statistical knowledge</em> to be comfortable with <em>knowing that you don’t know</em>.</li>
+</ul>
+<p><span class="large">Building up your empirical stamina</span></p>
+</section>
+<section id="teaching-and-learning-philosopy" class="slide level2">
+<h2>Teaching and learning philosopy</h2>
+<ul>
+<li><p><span class="salt">Instil:</span></p></li>
+<li><p><span class="saltinline">Intellectual discipline</span></p>
+<ul>
+<li><code>Think critically and form your own opinions</code></li>
+</ul></li>
+<li><p><span class="saltinline">Intellectual humility</span></p>
+<ul>
+<li><code>Enough confidence to be comfortable in your own confusion</code></li>
+</ul></li>
+<li><p><span class="saltinline">Good citizenship</span></p>
+<ul>
+<li><code>Acting ethically, altruistically,  responsibly and professionally</code></li>
+</ul></li>
+<li><p><span class="saltinline">Employability</span></p>
+<ul>
+<li><code>Develop students into employable graduates</code> </li>
+</ul></li>
+</ul>
+</section>
+<section id="teaching-and-learning-approach" class="slide level2">
+<h2>Teaching and learning approach</h2>
+<ul>
+<li>Lectures will combine concepts and financial application with live-coding.</li>
+<li>Come prepared and bring your laptop or device with web browser.</li>
+<li>Interactive tutorials on QMS Remote Analytics Platform (Q-RaP).</li>
+</ul>
+</section>
+<section id="feedback" class="slide level2">
+<h2>Feedback</h2>
+<ul>
+<li>Student <em>feedback</em> is important to me and I will provide this in a <em>professional</em> manner <em>conditional</em> on students behaving in a <em>professional and courteous</em> manner.</li>
+<li>Each week there will be an anonymous poll where you can give feedback.</li>
+<li>I am a NICE person when students act in a professional and courteous.</li>
+<li>Otherwise I can be a fastidious scold.</li>
+</ul>
+<blockquote>
+<p>Read my communiction policy link</p>
+</blockquote>
+</section>
+<section id="q-rap" class="slide level2">
+<h2>Q-RaP</h2>
+<h4 id="queens-business-school-remote-analytics-platform">Queen’s Business School Remote Analytics Platform</h4>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h4 id="you-used-to-have-this">you used to have this</h4>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="img/jonathan-borba-PZBjJ12Xv2s-unsplash.jpg" style="width:70.0%"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<h4 id="and-now-you-have-this">and now you have this</h4>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="img/sincerely-media-o5Key-1HzaY-unsplash.jpg" style="width:80.0%"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="what-is-posit-cloud" class="slide level2">
+<h2>What is Posit Cloud?</h2>
 
----
-class: middle
+<img data-src="img/cloud.png" width="413" class="r-stretch"><p><a href="https://Posit.cloud/"><strong>Posit Cloud</strong></a> created to make it easy for professionals, hobbyists, trainers, teachers, and students to do, share, teach, and learn data science using</p>
+</section>
+<section id="spot-the-difference" class="slide level2">
+<h2>Spot the Difference?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="img/rstudio-ide.png" width="1214"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="img/rstudio-cloud.png" width="1194"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="first-look" class="slide level2">
+<h2>First look</h2>
+<p><a href="https://sso.posit.cloud/q-rap" class="uri">https://sso.posit.cloud/q-rap</a></p>
 
-## Course overview
+<img data-src="img/q-rap-landing-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"><h3 id="your-turn">Your turn</h3>
+<h4 id="students">👩‍💻 Students:</h4>
+<ul>
+<li>login to Q-RaP using your QUB credentials</li>
+<li>Create a new project and give it a name</li>
+<li>Install a package of your choice</li>
+<li>Create a template R Markdown document in the project</li>
+<li>Change the access level of the project so others can see it as well</li>
+<li>Copy the project URL and share it with a friend in class</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_12fc4618" data-warn-when="1" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section>
+<section id="course-overview" class="slide level2">
+<h2>Course overview</h2>
+<ul>
+<li>Prerequistes:
+<ul>
+<li>Financial Data Analytics</li>
+<li>A laptop or device you can access Q-RaP</li>
+<li>A growth mindset</li>
+</ul></li>
+<li>Asessement: 50% project + 50% computer-based class test</li>
+<li>Course also has a companion open sourced book found here <a href="https://q-rap.connect.qub.ac.uk/AFDA/" class="uri">https://q-rap.connect.qub.ac.uk/AFDA/</a></li>
+<li>All slides are hosted on GitHub and can be converted to PDFs as you desire.</li>
+</ul>
+</section>
+<section id="active-learning-and-the-15-minute-rule" class="slide level2">
+<h2>Active learning and the 15 minute rule</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/ZS8QHRtzcPg?si=HazZr5qaOdgpTk2X" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<ul>
+<li>We will use the <strong>15 minute</strong> rule in this class.</li>
+<li>If you encounter problems, spend 15 minutes troubleshooting on your own.</li>
+<li>Make use of Google and StackOverflow to resolve the error</li>
+<li>If your problem is not resolved after 15 minutes.</li>
+<li>Ask for help by booking into a coding clinic or in practicals</li>
+</ul>
+</section>
+<section id="plagiarism" class="slide level2">
+<h2>Plagiarism</h2>
+<ul>
+<li>I am trying to balance two competing perspectives:
+<ol type="1">
+<li>Collaboration is good</li>
+<li>Collaboration is cheating</li>
+</ol></li>
+<li>In-class collaboration is good <strong>to a point</strong>.</li>
+<li>You are always expected to write and submit your <strong>own work</strong>.</li>
+<li>Asking for help is ok (after 15 minute rule),</li>
+<li>Blindly copy from your peers (or published work) is not.</li>
+</ul>
+</section>
+<section id="to-explain-predict-or-describe" class="slide level2">
+<h2>To explain, predict or describe</h2>
+<ul>
+<li><p>It is <strong>wrongly</strong> assumed that high explanatory = high predictive power.</p></li>
+<li><p>Explanatory models apply statistics to data to test <strong>casual</strong> hypothesis of theoretical constructs.</p></li>
+<li><p>Prediction models apply statistics or data mining algorithms to data to predict future observations.</p></li>
+<li><p>The type of model uncertainty is different for each choice.</p></li>
+<li><p>Explaining minimises <em>bias</em>, while prediction minimises <em>bias + variance</em> occasionally sacrificing theoretical accuracy for empirical precision.</p></li>
+</ul>
+</section>
+<section id="building-a-model" class="slide level2">
+<h2>Building a model</h2>
+<ul>
+<li>How to use probability to do typical statistical modeling?</li>
+</ul>
+<ol type="1">
+<li>Design the model (data story)</li>
+</ol>
+<ul>
+<li>Formulated using theory from previous studies</li>
+</ul>
+<ol start="2" type="1">
+<li>Condition on the data (update or estimate model)</li>
+<li>Evaluate the model (critique)</li>
+</ol>
+<ul>
+<li><strong>And Repeat Until Satisified</strong></li>
+</ul>
+</section>
+<section id="reading-finance-papers-the-context" class="slide level2">
+<h2>Reading finance papers (the context)</h2>
+<ul>
+<li>You data story comes from reading research papers</li>
+</ul>
+<h4 id="research-project-tips">Research project tips</h4>
+<ul>
+<li>What is the puzzle the paper is trying to solve?</li>
+<li>How do they solve it?</li>
+<li>Does it develop a new model?</li>
+<li>Is it an existing technique with a new application?</li>
+<li>Is it a data mining excercise?</li>
+<li>Is the data of <em>good quality</em> ? Reliable, sample size etc.</li>
+</ul>
+</section>
+<section id="reading-finance-papers" class="slide level2">
+<h2>Reading finance papers</h2>
+<h3 id="research-project-tips-1">Research project tips</h3>
+<ul>
+<li>Have model assumptions been validly checked and critiqued?</li>
+<li>Are results interpreted sensibly or exaggerated?</li>
+<li>Do results actually address the questions posed?</li>
+<li>Have conclusions been drawn appropriate or overstated?</li>
+</ul>
+</section>
+<section id="model-comparison" class="slide level2">
+<h2>Model comparison</h2>
+<p>.pull-left-1.large[Instead of falsifying a null model, compare meaningful models.]</p>
+<p>.pull-right-2[ .large[Basic problems] - Overfitting or Data Snooping - Causal inference - Ockham’s razor is silly - Information theory is less silly - AIC, cross-validation - Must distinguish prediction from inference]</p>
+</section>
+<section id="applying-financial-time-series-econometrics" class="slide level2">
+<h2>Applying financial time series econometrics</h2>
+<ul>
+<li>Financial time series econometrics is concerned with theory and practice of asset valuation over time</li>
+<li>It has similarity to other time series analysis but has some added uncertainty.</li>
+<li>FTS analysis must deal with the ever-changing business and economic enviroment and the fact that volatility is not directly observed.</li>
+</ul>
+</section>
+<section id="applying-financial-time-series-econometrics-1" class="slide level2">
+<h2>Applying financial time series econometrics</h2>
+<p><strong>Describe</strong></p>
+<ol type="1">
+<li>Estimating parameters of well-defined probability models that describe the behaviour of financial time series.</li>
+</ol>
+<p><strong>Explain</strong></p>
+<ol start="2" type="1">
+<li>Testing hypotheses on how financial markets generate the series of interest.</li>
+</ol>
+<p><strong>Predict</strong></p>
+<ol start="3" type="1">
+<li>Forecast future realisations of the financial time series.</li>
+</ol>
+<p>class: center</p>
+</section>
+<section id="wrap_up" class="slide level2">
+<h2>Wrap_Up</h2>
+<p><span class="glow">Questions ?</span></p>
+<p>Slides created via the R packages:</p>
 
-- [Read the canvas home] carefully .large[[Canvas home](https://canvas.qub.ac.uk/courses/11736/pages/please-read-carefully)]
+<img src="img/logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
-    
-## Active learning and the 15 minute rule
+</div>
+</section>
+    </div>
+  </div>
 
-![](https://youtu.be/ZS8QHRtzcPg)
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="index_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="index_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="index_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="index_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
 
-&lt;!-- &lt;iframe width="300" --&gt;
-&lt;!--     height="200" --&gt;
-&lt;!--     title="Batman's growth mindset" --&gt;
-&lt;!--     src="https://youtu.be/ZS8QHRtzcPg"&gt; --&gt;
-&lt;!-- &lt;/iframe&gt; --&gt;
+  <script src="index_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="index_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="index_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="index_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
-  - We will use the **15 minute** rule in this class.
-  - If you encounter problems, spend 15 minutes troubleshooting on your own.
-  - Make use of Google and StackOverflow to resolve the error
-  - If your problem is not resolved after 15 minutes.
-  - Use my Slack channel to **[ask for help]**. join [here](https://join.slack.com/t/rethinkingeco-3ss9716/shared_invite/zt-12nfdfr7o-XAy2Ef1knAKXgUNo2kWw3w) 
-    
----
-class: middle
+  <script>
 
-.acid[
-# Plagiarism
-
-* I am trying to balance two competing perspectives:
-  1. Collaboration is good
-  2. Collaboration is cheating
-* In-class collaboration is good **to a point**.
-* You are always expected to write and submit your **own work**.
-* Asking for help is ok (after 15 minute rule), 
-* Blindly copy from your peers (or published work) is not.
-]
----
-class: middle
-
-## Important Dates
-
- * Project Deadline 31st March
- * Computer based exam (after easter break)
-
-
----
-class: middle
-
-.huge-text[Rethinking econometrics]
-
----
-class:middle
-
-## Rethinking econometrics
-
-.salt[
- - Statistics is the science of uncertainty and variation.
- - Time series financial econometrics is the application of statistics to dynamic problems in finance.
- - Ethically, statistical models should be thought of as engineered robots.
-]
----
-class: middle
-
-## Rethinking econometrics
-.large[
-- Statistic courses and books, including this one, resemble horoscopes
-- In order to remain plausibly correct, they must remain tremendously vague
-- There are strong incentives for statisticians to exaggerate the power of their advice.
-- Scientific discovery is not an additive process and statistical inference is only as critical as every other part of research.
-  ]
----
-class: middle
-
-## Rethinking econometrics
-.large[
-
-&gt;*Statistics is no closer to mathematics than cooking is to chemistry*- [Terry Speed 1986](http://iase-web.org/documents/papers/icots2/Speed.pdf)
-
-- In statistics context is king, and in econometrics we have to look to the context of the research questions before applying techniques.
-
-- Blind application of techniques without understanding is dangerous and unethical.
-  ]
----
-class: middle
-
-## Rethinking econometric models
-
-- Modestly, models can be thought of as **engineer statistical robots**. 
-- Engineered via a set of (usually unrealistic) assumptions.
-- Animated by "truth".
-- Hopefully powerful.
-- Blind to the creator's intent.
-- Easy to misuse.
-- Not even false: They are as false as a hammer!
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
  
+        // Display controls in the bottom right corner
+        controls: false,
 
----
-class: middle
- 
-## "Scaffolding" by Seamus Heaney, 1939–2013
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
 
-.blockquote[
-Are careful to test out the scaffolding;
-Masons, when they start upon a building, 
-Are careful to test out the scaffolding; 
-Make sure that planks won’t slip at busy points,
-Secure all ladders, tighten bolted joints.
-And yet all this comes down when the job’s done
-Showing off walls of sure and solid stone.
-So if, my dear, there sometimes seem to be
-Old bridges breaking between you and me
-Never fear. We may let the scaffolds fall 
-Confident that we have built our wall.
-]
----
-class: middle
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
 
-## Ethical econometrics
-.large[
-  - Ethical econometrics is having enough confidence and knowledge in statistics to understand its limitations.
-  - This course provides an *ethical* scaffold, to construct *statistical* models.
-  - This course will force you to perform step-by-step calculations that are usually automated.
-  ]
----
-class: middle
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
 
-## Ethical econometrics  
-.large[
-  - The reason for all the algorithmic fuss is to ensure that you understand enough of the details to make sensible choices and interpretations in your own modeling work.
-  - At first we will take things slow but move on to use more automation.
+        // Display a presentation progress bar
+        progress: true,
 
+        // Display the page number of the current slide
+        slideNumber: false,
 
-.fat[Put up your wall, and then let the scaffolding fall.]
-]
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
 
----
-class: middle
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
 
-## Rethinking: Staring into the abyss. 
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
 
-* Econometric models can be complicated monsters. 
-* But as models become more monstrous, so too does the code needed to compute predictions and display them. **With power comes hardship.** 
-* It’s better to see the guts of the machine than to live in awe or fear of it.  
-* Software can be and often is written to hide all the monstrosity from us. 
-* But this doesn’t make it go away. 
-* Instead, it just makes the models forever mysterious. 
-* For some users, mystery translates into awe. 
-* For others, it translates into skepticism. 
-* Neither condition is necessary, as long as we’re willing to learn the structure of the models we are using.
-* And if you aren’t willing to learn the structure of the models, then don’t do your own statistics. 
-* Instead, collaborate with or hire a statistician.
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
 
----
-class: middle
+        // Push each slide change to the browser history
+        history: true,
 
-## Model checking
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
 
-* Every model is a merger of **sense** and **nonsense**
-* When we understand a model, we find its sense and control its nonsense.
-* Complex models should not be view with awe but with **informed** suspicion.
-* Intellectual discipline provides the base to be *informed* 
-      * comes with breaking down the model into its components and checking its validity.
+        // Enable the slide overview mode
+        overview: true,
 
----
-class: middle
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
 
-## Ethical econometrics using Open Science
-.large[
-  - Using Quarto, Git, Github.
-  - An industry standard for modern statistical analysis.
-  - Creates reusable, transparent, and interpretable code.
-  - Ethical econometrics is about creating reproducible research.
-  - The goal of this course is to teach basic computational skills for sensible FTS analysis.
-  - You will not become an expert programmer!
-]
----
-class: middle
+        // Vertical centering of slides
+        center: false,
 
-.huge-text[Uncertainty in econometrics]
+        // Enables touch navigation on devices with touch input
+        touch: true,
 
----
-class: middle
+        // Loop the presentation
+        loop: false,
 
-## Uncertainty in econometrics
+        // Change the presentation direction to be RTL
+        rtl: false,
 
-.large[
-  - Uncertainty is the overarching tenent of statistics.
-  - Uncertainty is applied using a probability theory.
-  - Probability theory is just a calculus for counting; and thus can be used to represent plausibility of things like model parameters.
-  - Unlike most other branches of mathematics, statistics has no unifying theory of probability.
-  - The two popular approaches to probability are bayesian and frequentist.
-]
----
-class: middle
-  
-## Bayesian inference
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
 
-  - The term *bayesian* has many uses in statistics but mainly as a way of interpreting probability.
-  - In modest terms, Bayesian inference is no more than counting the number of ways things can happen, according to our assumptions.
-  - More plausible things can happen more ways.
-  
-## Bayesian inference  
-  - Once assumptions are defined, Bayesian inference forces a purely logical way of processing that information to produce inference.
-  - Count all the ways data can happen, according to assumptions
-  - Assumptions with more ways that are consistent with the data are more plausible.
-  - In this way all parts of the model building process can exhibit uncertainty.
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
 
----
-class: middle
-  
-## Frequentist inference
-  - Frequentist probability is a special case of Bayesian probability.
-  - It defines probability by connection to countable events and their frequencies in very large samples.
-  - The leads to frequentist uncertainty being premised on imaginery resampling of data.
-  - A fantasy of repeating the measurement many many times, to collect a list of values which will have some pattern to it.
-  
-## Frequentist inference  
-  - This means that parameters and models cannot have probability distributions, only measurement (data).
-  - The distribution of these measurement is called a **SAMPLING DISTRIBUTION**.
-  - In practice resampling is never done, and in general it doesn't even make sense. 
-  
----
-class: middle
+        // Turns fragments on and off globally
+        fragments: true,
 
-## Bayesian Versus frequentist
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
 
-- The frequentist philosophical approach (sometime referred to as *classical*) is convention in econometrics.
-- This is probably more to do with scientists' desire for results via *bright line* hypothesis testing than rigorous analysis.
-- It involves postulating a theory then setting up a model and collecting data to test this model.
-- Based on the results of the model, the theory is supported or refuted.
-- A common approach is null hypothesis significance testing (NHST) using p-values.
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
 
----
-class: middle
-  
-## Bayesian versus frequentist
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
 
-- In Bayesian inference the theory and model are developed together.
-- Parameters, models and measurement have probability distributions.
-- An assessment of existing knowledge is formulated into *prior* probabilities.
-- Data are combined with *priors* to form and model in a strictly logical way to produce updated probabilities known as *posteriors*.
-- Bayesian inference is computationally intensive, which used to be a barrier to application.
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
 
----
-class: middle
-  
-## Bayesian Versus frequentist
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
 
-- Some *classical* researcher find Bayesian approach controversial.
-- Strong priors can be hard to dominate with data, so researchers can pick whatever results they want!
-- In modern statistics this controversy is largely redundant.
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
 
----
-class: middle
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
 
-## Rethinking econometrics 
-- In ethical econometrics, each approach can arguable have fantastical assumptions:
-1. What does the data look like under resampling?
-2. Using probability to describe prior beliefs or knowledge.
-- Rather like robots, statistical models are neither true or false, rather constructs engineered for some purpose.
-- Importantly, context is everything in statistics, and a *ethical econometrician* should use all avaliable tools in their statistical engineering arsenal.
-  
----
-class: middle
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
 
-.huge-text[Applying time series financial econometrics]
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
 
----
-class: middle
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
 
-## Rethinking econometrics: 
-#### to explain, predict or describe
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
 
-.large[
-- It is **wrongly** assumed that high explanatory = high predictive power. 
-- Explanatory models apply statistics to data to test **casual** hypothesis of theoretical constructs.
-- Prediction models apply statistics or data mining algorithms to data to predict future observations.
-- The type of model uncertainty is different for each choice.
-- Explaining minimises *bias*, while prediction minimises *bias + variance* occasionally sacrificing theoretical accuracy for empirical precision.
-  ]
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
 
----
-class: middle
+        // The display mode that will be used to show slides
+        display: 'block',
 
-## Building a model
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
 
-* How to use probability to do typical statistical modeling?
-1. Design the model (data story)
-  * Formulated using theory from previous studies
-2. Condition on the data (update or estimate model)
-3. Evaluate the model (critique)
-* **And Repeat Until Satisified**
-  
----
-class: middle
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
 
-## Reading finance papers (the context)
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
 
-- You data story comes from reading research papers
-  
-#### Research project tips
-- What is the puzzle the paper is trying to solve?
-- How do they solve it?
-- Does it develop a new model?
-- Is it an existing technique with a new application?
-- Is it a data mining excercise?
-- Is the data of *good quality* ? Reliable, sample size etc.
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
 
----
-class: middle
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
 
-## Reading finance papers
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
 
-### Research project tips
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
 
-- Have model assumptions been validly checked and critiqued?
-- Are results interpreted sensibly or exaggerated?
-- Do results actually address the questions posed?
-- Have conclusions been drawn appropriate or overstated?
-  
----
-class: middle
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
 
-## Model comparison
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
 
-.pull-left-1.large[Instead of falsifying a null model, compare meaningful models.]
+        height: 700,
 
-.pull-right-2[
-.large[Basic problems]
-- Overfitting or Data Snooping
-- Causal inference
-- Ockham's razor is silly
-- Information theory is less silly
-- AIC, cross-validation
-- Must distinguish prediction from inference
-]  
----
-class: middle
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
 
-## Applying financial time series econometrics
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
 
-  - Financial time series econometrics is concerned with theory and practice of asset valuation over time
-  - It has similarity to other time series analysis but has some added uncertainty.
-  - FTS analysis must deal with the ever-changing business and economic enviroment and the fact that volatility is not directly observed.
-  
----
-class: middle
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
 
-## Applying financial time series econometrics
-  
-  **Describe**
-  
-  1. Estimating parameters of well-defined probability models that describe the behaviour of financial time series.
-  
-  **Explain**
-  
-  2. Testing hypotheses on how financial markets generate the series of interest. 
-  
-  **Predict**
-  
-  3. Forecast future realisations of the financial time series.
-  
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
 
----
-class: center
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
 
-# .glow[Questions?]
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
 
-Slides created via the R packages:
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
 
-[**xaringan**](https://github.com/yihui/xaringan)&lt;br&gt;
-[gadenbuie/xaringanthemer](https://github.com/gadenbuie/xaringanthemer)
+      })();
+    </script>
 
-The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](http://yihui.name/knitr), and [R Quarto](https://quarto.org).
-    </textarea>
-<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
-<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-<script src="https://platform.twitter.com/widgets.js"></script>
-<script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": true,
-"ratio": "16:9"
-});
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
-  window.dispatchEvent(new Event('resize'));
-});
-(function(d) {
-  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
-  if (!r) return;
-  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
-  d.head.appendChild(s);
-})(document);
-
-(function(d) {
-  var el = d.getElementsByClassName("remark-slides-area");
-  if (!el) return;
-  var slide, slides = slideshow.getSlides(), els = el[0].children;
-  for (var i = 1; i < slides.length; i++) {
-    slide = slides[i];
-    if (slide.properties.continued === "true" || slide.properties.count === "false") {
-      els[i - 1].className += ' has-continuation';
-    }
-  }
-  var s = d.createElement("style");
-  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
-  d.head.appendChild(s);
-})(document);
-// delete the temporary CSS (for displaying all slides initially) when the user
-// starts to view slides
-(function() {
-  var deleted = false;
-  slideshow.on('beforeShowSlide', function(slide) {
-    if (deleted) return;
-    var sheets = document.styleSheets, node;
-    for (var i = 0; i < sheets.length; i++) {
-      node = sheets[i].ownerNode;
-      if (node.dataset["target"] !== "print-only") continue;
-      node.parentNode.removeChild(node);
-    }
-    deleted = true;
-  });
-})();
-// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
-// screen reader (see PR #262)
-(function(d) {
-  let res = {};
-  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
-    const t = tr.querySelector('td:nth-child(2)').innerText;
-    tr.querySelectorAll('td:first-child .key').forEach(key => {
-      const k = key.innerText;
-      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
-    });
-  });
-  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
-})(document);
-(function() {
-  "use strict"
-  // Replace <script> tags in slides area to make them executable
-  var scripts = document.querySelectorAll(
-    '.remark-slides-area .remark-slide-container script'
-  );
-  if (!scripts.length) return;
-  for (var i = 0; i < scripts.length; i++) {
-    var s = document.createElement('script');
-    var code = document.createTextNode(scripts[i].textContent);
-    s.appendChild(code);
-    var scriptAttrs = scripts[i].attributes;
-    for (var j = 0; j < scriptAttrs.length; j++) {
-      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
-    }
-    scripts[i].parentElement.replaceChild(s, scripts[i]);
-  }
-})();
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-(function(time) {
-  var d2 = function(number) {
-    return ('0' + number).slice(-2); // left-pad 0 to minutes/seconds
-  },
-
-  time_format = function(total) {
-    var secs = Math.abs(total) / 1000;
-    var h = Math.floor(secs / 3600);
-    var m = Math.floor(secs % 3600 / 60);
-    var s = Math.round(secs % 60);
-    var res = d2(m) + ':' + d2(s);
-    if (h > 0) res = h + ':' + res;
-    return res;  // [hh:]mm:ss
-  },
-
-  slide_number_div = function(i) {
-    return document.getElementsByClassName('remark-slide-number').item(i);
-  },
-
-  current_page_number = function(i) {
-    return slide_number_div(i).firstChild.textContent;  // text "i / N"
-  };
-
-  var timer = document.createElement('span'); timer.id = 'slide-time-left';
-  var time_left = time, k = slideshow.getCurrentSlideIndex(),
-      last_page_number = current_page_number(k);
-
-  setInterval(function() {
-    time_left = time_left - 1000;
-    timer.innerHTML = ' ' + time_format(time_left);
-    if (time_left < 0) timer.style.color = 'red';
-  }, 1000);
-
-  slide_number_div(k).appendChild(timer);
-
-  slideshow.on('showSlide', function(slide) {
-    var i = slide.getSlideIndex(), n = current_page_number(i);
-    // reset timer when a new slide is shown and the page number is changed
-    if (last_page_number !== n) {
-      time_left = time; last_page_number = n;
-      timer.innerHTML = ' ' + time_format(time); timer.style.color = null;
-    }
-    slide_number_div(i).appendChild(timer);
-  });
-})(150000);
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
-
-<script>
-slideshow._releaseMath = function(el) {
-  var i, text, code, codes = el.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
       }
-    }
-    i++;
-  }
-};
-slideshow._releaseMath(document);
-</script>
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-(function () {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
-  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
-    script.src  = script.src.replace(/^https?:/, '');
-  document.getElementsByTagName('head')[0].appendChild(script);
-})();
-</script>
-  </body>
-</html>
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
